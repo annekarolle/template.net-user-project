@@ -32,7 +32,7 @@
 
         private void WriteTextInFile(string mensage)
         {
-            var filePath = $@"C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\StoreFIAP\bin\LOG-{DateTime.Now:yyyy-MM-dd}.txt";
+            var filePath = $@"C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\LOG-{DateTime.Now:yyyy-MM-dd}.txt";
             if (!File.Exists(filePath))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
