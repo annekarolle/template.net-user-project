@@ -56,20 +56,48 @@
             </summary>
             <param name="id"></param>
         </member>
-        <member name="M:StoreFIAP.Interface.IUserRepository.GetUserByNameAndPassword(System.String,System.String)">
+        <member name="M:StoreFIAP.Interface.IUserRepository.ValidatedCredential(System.String,System.String)">
             <summary>
             Retorna o usuário encontrado com os parametros passados
             </summary>
             <param Email="Email"></param>
             <param password="password"></param>
+            <returns></returns>       
+        </member>
+        <member name="M:StoreFIAP.Interface.IUserRepository.IsEmailAlreadyRegistered(System.String)">
+            <summary>
+            Retornar um boleano se o email já esta registrado no banco
+            </summary>
+            <param name="email"></param>
             <returns></returns>
         </member>
-        <member name="M:StoreFIAP.Repository.EFUserRepository.GetUserByNameAndPassword(System.String,System.String)">
+        <member name="M:StoreFIAP.Interface.IUserRepository.GetUserByEmail(System.String)">
+            <summary>
+            Retorna um usuario com o email informado
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoreFIAP.Repository.EFUserRepository.ValidatedCredential(System.String,System.String)">
             <summary>
             Faz a verificação das credenciais passadas e retorna o usuário.
             </summary>
             <param name="email"></param>
             <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StoreFIAP.Repository.EFUserRepository.IsEmailAlreadyRegistered(System.String)">
+            <summary>
+            Faz a verificação se o email já esta registrado
+            </summary>
+            <param name="email"></param>        
+            <returns></returns>
+        </member>
+        <member name="M:StoreFIAP.Repository.EFUserRepository.GetUserByEmail(System.String)">
+            <summary>
+            Faz a verificação se o email já esta registrado
+            </summary>
+            <param name="email"></param>        
             <returns></returns>
         </member>
         <member name="M:UserController.SaveUser(StoreFIAP.DTO.SaveUserDTO)">
@@ -99,9 +127,18 @@
             <response code="403"> Ñão Autorizado</response>
             <response code="404"> Usuário não encontrado</response>
         </member>
-        <member name="M:UserController.PutUser(System.Int32)">
+        <member name="M:UserController.ChangeUserEmail(System.String)">
             <summary>
-            Modifica dados do usuário, método necessita de autenticação.
+            Modifica email do usuário, método necessita de autenticação.
+            </summary>
+            <param name="id"></param>
+            <response code="200"> Retonar Sucesso</response>
+            <response code="401"> Não Autenticado</response> 
+            <response code="404"> Usuário não encontrado</response>
+        </member>
+        <member name="M:UserController.ChangePassword(System.String)">
+            <summary>
+            Modifica a senha do usuário, método necessita de autenticação.
             </summary>
             <param name="id"></param>
             <response code="200"> Retonar Sucesso</response>
@@ -118,6 +155,28 @@
             <response code="401"> Não Autenticado</response>
             <response code="403"> Ñão Autorizado</response>
             <response code="404"> Usuário não encontrado</response>
+        </member>
+        <member name="M:UserController.DesactiveUser">
+            <summary>
+            Desativa usuário, o método necessita de autenticação.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+            <response code="200"> Retonar Sucesso</response>
+            <response code="401"> Não Autenticado</response>
+            <response code="404"> Usuário não encontrado</response>
+        </member>
+        <member name="T:UserTemplate.Migrations.firstMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:UserTemplate.Migrations.firstMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:UserTemplate.Migrations.firstMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:UserTemplate.Migrations.firstMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
     </members>
 </doc>

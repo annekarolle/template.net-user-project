@@ -15,6 +15,7 @@ namespace StoreFIAP.Entity
         public string Email { get; set; }
         public string Password { get; set; }    
         public PermitionsTypes Permitions { get; set; }
+        public bool IsActived { get; set; }
       
         
 
@@ -33,13 +34,20 @@ namespace StoreFIAP.Entity
             Email = saveUserDTO.Email;
             Password = passwordHasher.HashPassword(saveUserDTO.Password);
             Permitions = saveUserDTO.Permitions;
+            IsActived = true;
+            CreatedDate = DateTime.UtcNow;
         }
 
+        public void DesactiveUser(int id)
+        {
+            IsActived = false;
+            DesactivedDate = DateTime.Now;
+        }
 
-        
-
-
-
-
+        public void ChangeUserPassword(string NewPassword, PasswordHasherService passwordHasher)
+        {
+            Password = passwordHasher.HashPassword(NewPassword);
+            UpdatedDate = DateTime.Now;
+        }
     }
 }

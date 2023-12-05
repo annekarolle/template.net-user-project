@@ -24,7 +24,7 @@ namespace StoreFIAP.Repository
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User GetUserByNameAndPassword(string email, string password)
+        public User ValidatedCredential(string email, string password)
         {   
             var user = _context.User.FirstOrDefault(user => user.Email == email);
 
@@ -36,5 +36,39 @@ namespace StoreFIAP.Repository
 
             return null;
         }
+
+
+        /// <summary>
+        /// Faz a verificação se o email já esta registrado
+        /// </summary>
+        /// <param name="email"></param>        
+        /// <returns></returns>
+        public bool IsEmailAlreadyRegistered(string email)
+        {
+            var user = _context.User.FirstOrDefault(user => user.Email == email);
+                         
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+                        
+        }
+
+        /// <summary>
+        /// Faz a verificação se o email já esta registrado
+        /// </summary>
+        /// <param name="email"></param>        
+        /// <returns></returns>
+        public User GetUserByEmail(string email)
+        {
+            var user = _context.User.FirstOrDefault(user => user.Email == email && user.IsActived == true);
+
+            return user ?? throw new ArgumentException("Usuário não encontrado!");
+        }
+
     }
 }

@@ -29,7 +29,7 @@ namespace StoreFIAP.Controllers
         [HttpPost]
         public IActionResult Authenticate([FromBody ] LoginDTO login)
         {
-            var user = _userRepository.GetUserByNameAndPassword(login.Email, login.Password);          
+            var user = _userRepository.ValidatedCredential(login.Email, login.Password);          
 
             if (user == null)
                 return NotFound(new { message = "Email or Password invalid" });

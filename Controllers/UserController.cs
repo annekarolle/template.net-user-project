@@ -5,13 +5,14 @@ using StoreFIAP.DTO;
 using StoreFIAP.Entity;
 using StoreFIAP.Enums;
 using StoreFIAP.Interface;
+using System.Security.Claims;
 using UserTemplate.Services;
 
 [ApiController]
 [Route("user")]
 public class UserController : ControllerBase
 {
-    private IUserRepository _userRepository;
+    private IUserRepository _userRepository; 
     private readonly ILogger<UserController> _logger;
     private readonly PasswordHasherService _passwordHasher;
 
@@ -22,6 +23,8 @@ public class UserController : ControllerBase
         _passwordHasher = passwordHasher;
     }
 
+    
+
     /// <summary>
     /// Cria um novo usuário.
     /// </summary>
@@ -31,7 +34,14 @@ public class UserController : ControllerBase
     [HttpPost("saveUser")]
     public IActionResult SaveUser(SaveUserDTO userDTO)
     {
-      
+
+        if (_userRepository.IsEmailAlreadyRegistered(userDTO.Email))
+        {
+            var errorMessage = $"Error: Email {userDTO.Email} já esta cadastrado.";
+            _logger.LogError(errorMessage);
+            return BadRequest(errorMessage);
+        }
+
         _userRepository.Save(new User(userDTO, _passwordHasher));
        
         var message = $"User {userDTO.Name} created with sucess!";
@@ -54,6 +64,8 @@ public class UserController : ControllerBase
         return Ok(_userRepository.GetAll());
     }
 
+     
+
 
     /// <summary>
     ///  Obtém todos os usuários, o método necessita de autenticação e permissão de Administrador
@@ -69,28 +81,71 @@ public class UserController : ControllerBase
     [HttpGet("getUserById/{id}")]
     public IActionResult GetUserById(int id)
     {
-        return Ok(_userRepository.GetById(id));
+        var user = _userRepository.GetById(id);
+
+        if(user == null) 
+            return NotFound("Usuário não encontrado!");
+
+        return Ok(user);
     }
 
 
     /// <summary>
-    /// Modifica dados do usuário, método necessita de autenticação.
+    /// Modifica email do usuário, método necessita de autenticação.
     /// </summary>
     /// <param name="id"></param>
     /// <response code="200"> Retonar Sucesso</response>
     /// <response code="401"> Não Autenticado</response> 
     /// <response code="404"> Usuário não encontrado</response>
     [Authorize]
-    [HttpPut("putUser/{id}")]
-    public IActionResult PutUser(int id)
+    [HttpPatch("changeUserEmail")]
+    public IActionResult ChangeUserEmail(string newEmail)
     {
-        var user = _userRepository.GetById(id);
+        var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+        var user = _userRepository.GetUserByEmail(userEmail);
 
         if (user == null)
-            return NotFound("Usuário não encontrado");
+        {
+            return NotFound("Usuário não encontrado!");
+        }
+        else
+        {                        
+            user.Email = newEmail;
+            user.UpdatedDate = DateTime.Now;
+            _userRepository.Put(user);
 
-        _userRepository.Put(user);
-        return Ok("Usuario alterado com sucesso");
+            return Ok("Usuario alterado com sucesso");
+        }               
+
+      
+    }
+
+    /// <summary>
+    /// Modifica a senha do usuário, método necessita de autenticação.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <response code="200"> Retonar Sucesso</response>
+    /// <response code="401"> Não Autenticado</response> 
+    /// <response code="404"> Usuário não encontrado</response>
+    [Authorize]
+    [HttpPatch("changePassword")]
+    public IActionResult ChangePassword(string newPassword)
+    {
+        var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+        var user = _userRepository.GetUserByEmail(userEmail);
+
+        if (user == null)
+        {
+            return NotFound("Usuário não encontrado!");
+        }
+        else
+        {
+            user.ChangeUserPassword(newPassword, _passwordHasher);
+
+            return Ok("Senha alterada com sucesso");
+        }
     }
 
     /// <summary>
@@ -106,8 +161,50 @@ public class UserController : ControllerBase
     [Authorize(Roles = Permitions.Admin)]
     [HttpDelete("deleteUser/{id}")]
     public IActionResult DeleteUser(int id)
-    {
-        _userRepository.Delete(id);
-        return Ok("Usuario deletado com sucesso");
+    {        
+
+        var user = _userRepository.GetById(id);
+
+        if (user == null)
+        {
+            return NotFound("Usuário não encontrado!");
+        }           
+        else
+        {
+            _userRepository.Delete(id);
+            return Ok("Usuario deletado com sucesso");
+        }       
     }
+
+    /// <summary>
+    /// Desativa usuário, o método necessita de autenticação.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <response code="200"> Retonar Sucesso</response>
+    /// <response code="401"> Não Autenticado</response>
+    /// <response code="404"> Usuário não encontrado</response>
+    [Authorize]    
+    [HttpDelete("desactiveUser")]
+    public IActionResult DesactiveUser()
+    {
+        var userEmail = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+
+        var user = _userRepository.GetUserByEmail(userEmail);
+
+        if (user == null)
+        {
+            return NotFound("Usuário não encontrado ou desativado!");
+        }
+        else
+        {
+            user.DesactiveUser(user.Id);
+            return Ok("Usuario deletado com sucesso");
+        }
+
+    }
+
+
+
+
 }

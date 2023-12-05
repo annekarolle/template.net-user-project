@@ -19,7 +19,7 @@ namespace StoreFIAP.Services
         public string GetToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("Secret"));
+            var key = Encoding.ASCII.GetBytes(_config.GetValue<string>("SecretKey"));
 
             var tokenDescription = new SecurityTokenDescriptor()
             {

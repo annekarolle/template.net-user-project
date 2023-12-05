@@ -10,11 +10,22 @@ namespace StoreFIAP.Interface
      /// </summary>
      /// <param Email="Email"></param>
      /// <param password="password"></param>
-     /// <returns></returns>
-        User GetUserByNameAndPassword(string email, string password); 
+     /// <returns></returns>       
+        User ValidatedCredential(string email, string password);
 
 
-        
+        /// <summary>
+        /// Retornar um boleano se o email já esta registrado no banco
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        bool IsEmailAlreadyRegistered(string email);
 
+        /// <summary>
+        /// Retorna um usuario com o email informado
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        User GetUserByEmail(string email);
     }
 }

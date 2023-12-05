@@ -71,7 +71,7 @@ builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderCon
 
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 
-var key = Encoding.ASCII.GetBytes(configuration.GetValue<string>("Secret"));
+var key = Encoding.ASCII.GetBytes(configuration.GetValue<string>("SecretKey"));
 
 builder.Services.AddAuthentication(x =>
 {

@@ -262,3 +262,17 @@ C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-u
 C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\obj\Debug\net7.0\UserTemplate.pdb
 C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\obj\Debug\net7.0\UserTemplate.genruntimeconfig.cache
 C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\obj\Debug\net7.0\ref\UserTemplate.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\TechTalk.SpecFlow.xUnit.SpecFlowPlugin.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\BoDi.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Gherkin.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\TechTalk.SpecFlow.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\SpecFlow.Internal.Json.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Validation.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\xunit.abstractions.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\xunit.core.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\xunit.execution.dotnet.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Xunit.SkippableFact.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Castle.Core.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Moq.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\Moq.AutoMock.dll
+C:\Users\annek\OneDrive\Documentos\ESTUDO\FIAP\Modulo 1\StoreFiap\template.net-user-project\bin\Debug\net7.0\NonBlocking.dll

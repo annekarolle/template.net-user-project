@@ -4,7 +4,6 @@
     {
         Admin = 1,
         Staff = 2
-
     }
 
     public static class Permitions
